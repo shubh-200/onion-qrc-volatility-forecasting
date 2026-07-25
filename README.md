@@ -1,6 +1,6 @@
 # VolQRC — Volatility Quantum Reservoir Computing for GIC 2026
 
-[![Launch on qBraid](https://qbraid-static.s3.amazonaws.com/deploy-to-qbraid.svg)](https://account.qbraid.com/launch?gitHubUrl=https://github.com/shubh-200/onion-qrc-volatility-forecasting)
+[<img src="https://qbraid-static.s3.amazonaws.com/logos/Launch_on_qBraid_white.png" width="150">](https://account.qbraid.com/launch?gitHubUrl=https://github.com/shubh-200/onion-qrc-volatility-forecasting)
 
 * **Team Name:** VolQRC Team
 * **Project Title:** VolQRC: Volatility Quantum Reservoir Computing for SPX Realized Variance Forecasting
