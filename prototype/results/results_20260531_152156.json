@@ -1,0 +1,74 @@
+[
+  {
+    "model": "OnionQRC",
+    "n_qubits": 5,
+    "rmse": 1.4901193036108162,
+    "qlike": 0.0,
+    "r2": -0.38869158176461416,
+    "mz_intercept": -3.7730008415446354,
+    "mz_slope": 0.017102799372995466,
+    "mz_unbiased": false,
+    "regime_accuracy": 0.3506311360448808
+  },
+  {
+    "model": "OnionQRC",
+    "n_qubits": 10,
+    "rmse": 1.3879488618970839,
+    "qlike": 0.0,
+    "r2": -0.2047880507240496,
+    "mz_intercept": -3.3854299116894153,
+    "mz_slope": 0.12736645722792345,
+    "mz_unbiased": false,
+    "regime_accuracy": 0.35624123422159887
+  },
+  {
+    "model": "SingleBandQRC",
+    "n_qubits": 5,
+    "rmse": 1.2676768242243932,
+    "qlike": 0.0,
+    "r2": -0.0050341582693176345,
+    "mz_intercept": -3.3693664494717552,
+    "mz_slope": 0.12347269904006031,
+    "mz_unbiased": true
+  },
+  {
+    "model": "SingleBandQRC",
+    "n_qubits": 10,
+    "rmse": 1.267899013362879,
+    "qlike": 0.0,
+    "r2": -0.005386499243572596,
+    "mz_intercept": -3.5714477682329053,
+    "mz_slope": 0.07029147372370445,
+    "mz_unbiased": true
+  },
+  {
+    "model": "GARCH",
+    "n_qubits": "-",
+    "rmse": 4.957920001127524,
+    "qlike": 26.58481377748957,
+    "r2": -14.373145976321565,
+    "mz_intercept": -9.928426890715377,
+    "mz_slope": 6.37646349590043,
+    "mz_unbiased": false
+  },
+  {
+    "model": "HAR-RV",
+    "n_qubits": "-",
+    "rmse": 1.4272826775290348,
+    "qlike": 0.0,
+    "r2": -0.27404190015334806,
+    "mz_intercept": -3.7696392506843375,
+    "mz_slope": 0.018303423781580945,
+    "mz_unbiased": false
+  },
+  {
+    "model": "ESN",
+    "n_qubits": "-",
+    "rmse": 1.2902755569028415,
+    "qlike": 0.0,
+    "r2": -0.04118681866074603,
+    "mz_intercept": -5.033738952991086,
+    "mz_slope": -0.314230598430229,
+    "mz_unbiased": false
+  }
+]

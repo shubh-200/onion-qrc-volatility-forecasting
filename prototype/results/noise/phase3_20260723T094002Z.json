@@ -1,0 +1,214 @@
+{
+  "metadata": {
+    "case_count": 1,
+    "case_ids": [
+      "n5_seed42_shots256_ring_noiseless_shots_none"
+    ],
+    "command": [
+      "C:\\Users\\Shubham\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\python.exe",
+      "prototype/run_noise.py"
+    ],
+    "context": 1,
+    "created_at": "2026-07-23T09:40:02.486181+00:00",
+    "features": [
+      "log_rv_d",
+      "log_rv_w",
+      "log_rv_m",
+      "price_return"
+    ],
+    "full_matrix": false,
+    "horizon": 1,
+    "max_cases": null,
+    "quick": false,
+    "quick_rows": null,
+    "runner": "run_noise",
+    "source": "real_spx_rv",
+    "split_dates": {
+      "test": {
+        "end": "2017-06-28 00:00:00",
+        "start": "2015-12-11 00:00:00"
+      },
+      "train": {
+        "end": "2014-05-28 00:00:00",
+        "start": "2007-03-14 00:00:00"
+      },
+      "val": {
+        "end": "2015-12-10 00:00:00",
+        "start": "2014-05-29 00:00:00"
+      }
+    },
+    "split_sizes": {
+      "test": 389,
+      "train": 1815,
+      "val": 389
+    },
+    "tanh_scale": 2.0,
+    "versions": {
+      "arch": "8.0.0",
+      "numpy": "2.4.6",
+      "pandas": "2.2.2",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "python": "3.12.10",
+      "qiskit": "2.5.0",
+      "qiskit-aer": "0.17.2",
+      "scikit-learn": "1.6.1",
+      "scipy": "1.15.2",
+      "torch": null
+    }
+  },
+  "results": [
+    {
+      "amplitude_damping_gamma": null,
+      "backend": "qiskit_aer.AerSimulator",
+      "basis_gates": [
+        "id",
+        "rx",
+        "ry",
+        "rzz",
+        "cx"
+      ],
+      "case_id": "n5_seed42_shots256_ring_noiseless_shots_none",
+      "depolarizing_p": null,
+      "execution_resources": {
+        "circuits": 2593,
+        "shots_per_circuit": 256,
+        "total_shots": 663808,
+        "transpiled_depth_max": 17,
+        "transpiled_depth_mean": 17.0,
+        "transpiled_operation_totals": {
+          "measure": 12965,
+          "rx": 51860,
+          "ry": 12965,
+          "rzz": 51860
+        }
+      },
+      "logical_resources": {
+        "encoding_ry": 5,
+        "feedback_ry": 3,
+        "interaction_edges": 5,
+        "logical_gates": 48,
+        "measurements": 5,
+        "n_classical_bits": 5,
+        "n_observables": 15,
+        "n_qubits": 5,
+        "rx": 20,
+        "rzz": 20,
+        "single_qubit_gates": 28,
+        "topology": "ring",
+        "total_operations": 53,
+        "trotter_steps": 4,
+        "two_qubit_gates": 20
+      },
+      "model": "OnionQRC-shot-noise",
+      "n_qubits": 5,
+      "noise_kind": "noiseless_shots",
+      "noise_parameter": null,
+      "optimization_level": 1,
+      "regime_metrics": {
+        "test": {
+          "accuracy": 0.7583547557840618,
+          "balanced_accuracy": 0.6247555253372281,
+          "confusion_matrix": [
+            [
+              240,
+              22,
+              17
+            ],
+            [
+              24,
+              27,
+              10
+            ],
+            [
+              10,
+              11,
+              28
+            ]
+          ],
+          "labels": [
+            0,
+            1,
+            2
+          ],
+          "macro_f1": 0.6175784323080066,
+          "macro_precision": 0.6116677726166777,
+          "macro_recall": 0.6247555253372281,
+          "support": [
+            279,
+            61,
+            49
+          ]
+        },
+        "validation": {
+          "accuracy": 0.6606683804627249,
+          "balanced_accuracy": 0.5797775720133376,
+          "confusion_matrix": [
+            [
+              195,
+              25,
+              6
+            ],
+            [
+              68,
+              30,
+              12
+            ],
+            [
+              12,
+              9,
+              32
+            ]
+          ],
+          "labels": [
+            0,
+            1,
+            2
+          ],
+          "macro_f1": 0.5815433077601074,
+          "macro_precision": 0.6059469696969697,
+          "macro_recall": 0.5797775720133376,
+          "support": [
+            226,
+            110,
+            53
+          ]
+        }
+      },
+      "runtime_breakdown_seconds": {
+        "circuit_build": 1.2800290000523091,
+        "execution": 7.419852799959699,
+        "observable_extraction": 0.35744229999727395,
+        "total": 19.32518180000079,
+        "transpilation": 9.47212049999871
+      },
+      "runtime_seconds": 22.13340260000041,
+      "seed": 42,
+      "shots": 256,
+      "simulation_method": "automatic",
+      "status": "ok",
+      "test_dates": {
+        "end": "2017-06-28 00:00:00",
+        "start": "2015-12-11 00:00:00"
+      },
+      "test_metrics": {
+        "mae": 0.29427202212449416,
+        "n_obs": 389,
+        "qlike": 0.0628259038521216,
+        "r2": 0.6213995143661938,
+        "rmse": 0.36074784629350626
+      },
+      "topology": "ring",
+      "validation_dates": {
+        "end": "2015-12-10 00:00:00",
+        "start": "2014-05-29 00:00:00"
+      },
+      "validation_metrics": {
+        "mae": 0.2634118365864849,
+        "n_obs": 389,
+        "qlike": 0.06246584960128649,
+        "r2": 0.5617025435279929,
+        "rmse": 0.34348096233104686
+      }
+    }
+  ]
+}

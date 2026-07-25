@@ -1,0 +1,56 @@
+# configs/phase3.yaml
+# Phase 3 primary experiment configuration.
+# All values here match the frozen hyperparameters selected in Stage A (N=5, N=10 validation).
+# Do NOT edit for N=15/20 runs — freeze configuration before scaling.
+
+data:
+  rv_dataset: rv_dataset.csv
+  price_dataset: "global index etf return/SPX.csv"
+  spx_ticker: ".SPX"
+
+split:
+  train_fraction: 0.70
+  val_fraction: 0.15
+  # test_fraction is implied: 1 - train - val = 0.15
+
+features:
+  names: [log_rv_d, log_rv_w, log_rv_m, price_return]
+  tanh_scale: 2.0           # smooth bounding: tanh(z / tanh_scale)
+  context: 1                # single-day feature window (compact HAR)
+  horizon: 1                # one-day-ahead target
+
+reservoir:
+  topology: ring             # ring first; fully_connected is a second pass at N=5,10 only
+  trotter_steps: 4
+  dt: 0.5
+  h_field: 0.3
+  alpha_short: 1.0
+  alpha_mid: 0.6
+  alpha_long: 0.3
+  memory_feedback_strength: 0.2
+  observable_order: 2        # singles + pairs; triples require explicit n_third_order
+
+scaling:
+  n_qubits: [5, 10, 15, 20]
+  seeds: [42, 123, 2026]
+  topologies: [ring]         # add fully_connected for N=5,10 after ring baseline is complete
+
+readout:
+  ridge_alpha: 1.0
+  use_regime: true
+  gating_mode: cross_fitted  # causal; use 'oracle' only as explicit upper-bound ablation
+  regime_cv_splits: 5
+  classifier_pca_components: 8
+
+noise:
+  # Evaluated on the test period using warm-started memory from noiseless training sequence.
+  depolarizing_p: [0.001, 0.005, 0.01]
+  amplitude_damping_gamma: [0.001, 0.005, 0.01]
+  finite_shots: [256, 512, 1024, 4096]
+  aer_method: automatic       # statevector for N<=12; MPS for N=15,20
+
+statistics:
+  alpha: 0.10                 # MCS significance level
+  dm_loss: qlike
+  bootstrap_n: 1000
+  bootstrap_confidence: 0.95

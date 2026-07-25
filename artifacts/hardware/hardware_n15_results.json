@@ -1,0 +1,45 @@
+{
+  "created_at": "2026-07-24T21:11:17Z",
+  "results": [
+    {
+      "model": "OnionQRC QPU N=15 (IQM Garnet)",
+      "n_qubits": 15,
+      "topology": "ring",
+      "seed": 42,
+      "backend": "qbraid_qpu:aws:iqm:qpu:garnet",
+      "status": "ok",
+      "runtime_seconds": 1.2,
+      "validation_metrics": {
+        "rmse": 0.33809291627041715,
+        "r2": 0.5753454796520139,
+        "qlike": 0.061728109471064115,
+        "mae": 0.2586474776074214,
+        "n_obs": 389
+      },
+      "test_metrics": {
+        "rmse": 2.320814440736316,
+        "r2": -13.940023278217193,
+        "qlike": 1.4033129902654726,
+        "mae": 2.2971950078490715,
+        "n_obs": 24
+      },
+      "resource_counts": {
+        "encoding_ry": 15,
+        "feedback_ry": 0,
+        "interaction_edges": 15,
+        "logical_gates": 135,
+        "measurements": 15,
+        "n_classical_bits": 15,
+        "n_observables": 120,
+        "n_qubits": 15,
+        "rx": 60,
+        "rzz": 60,
+        "single_qubit_gates": 75,
+        "topology": "ring",
+        "total_operations": 150,
+        "trotter_steps": 4,
+        "two_qubit_gates": 60
+      }
+    }
+  ]
+}

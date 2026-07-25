@@ -1,0 +1,33 @@
+# configs/qpu_rigetti.yaml
+# Rigetti Cepheus-1-108Q via AWS — fallback QPU target.
+# Activate only if IQM Garnet is unavailable or over budget.
+
+provider: qbraid
+device_id: rigetti_cepheus_1_108q   # verify against provider.get_devices() output
+n_qubits: 20                         # select 20-qubit subgraph from 108-qubit device
+topology: ring                        # choose connected 20-qubit subring from coupling map
+
+native_gates: [rx, rz, cz, measure]
+optimization_level: 1
+
+# Rigetti AWS pricing (estimated; regenerate from live API)
+budget:
+  cost_per_task_credits: null         # update from live pricing
+  cost_per_shot_credits: null         # update from live pricing
+  spend_cap_credits: 9500
+
+panels:
+  smoke_test:
+    n_per_qubit_config: 3
+    n_qubits: [5, 10, 15, 20]
+    shots: 256
+
+  balanced_panel:
+    per_regime: 8
+    shots: 1024
+
+notes: >
+  Rigetti device topology differs from IQM. Re-run transpilation analysis before
+  freezing the production circuit. Do not assume the same coupling subgraph.
+  Check available Rigetti devices via qBraid at runtime since Rigetti hardware
+  availability changes frequently.

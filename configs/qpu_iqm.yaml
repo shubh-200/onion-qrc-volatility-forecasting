@@ -1,0 +1,51 @@
+# configs/qpu_iqm.yaml
+# IQM Garnet — primary QPU target (20 qubits, CZ-based superconducting).
+# Pricing as of 2026-07: 30 credits/task + 0.145 credits/shot.
+# Regenerate cost estimate from live device API before submission.
+
+provider: qbraid
+device_id: iqm_garnet          # verify against provider.get_devices() output
+n_qubits: 20
+topology: ring                  # ring matches IQM Garnet coupling; update from live coupling map
+
+native_gates: [r, cz, measure]  # IQM native; transpiler maps RZZ → CZ decomposition
+optimization_level: 1           # use 3 if depth reduction is critical after SWAP analysis
+
+# Budget breakdown (estimated, must regenerate from live pricing)
+budget:
+  total_credits: 10000
+  spend_cap_credits: 9500       # 5% safety buffer
+  cost_per_task_credits: 30
+  cost_per_shot_credits: 0.145
+
+# Execution panels (see §9.3 of the Phase 3 plan)
+panels:
+  smoke_test:
+    n_per_qubit_config: 3       # calm/elevated/crisis for each N
+    n_qubits: [5, 10, 15, 20]
+    shots: 256
+    estimated_credits: 805
+
+  balanced_panel:
+    per_regime: 8               # 8 calm + 8 elevated + 8 crisis = 24 circuits
+    shots: 1024
+    estimated_credits: 4284
+
+  recurrent_sequence:
+    days: 8                     # contiguous 8-day sequence
+    shots: 512
+    estimated_credits: 834
+
+  zne_mitigation:
+    n_observations: 4
+    zne_scale_factors: [1, 3, 5]
+    shots: 1024
+    estimated_credits: 1428
+
+  readout_calibration:
+    n_tasks: 2
+    shots: 2048
+    estimated_credits: 654
+
+# Fallback device
+fallback: rigetti_cepheus         # see qpu_rigetti.yaml

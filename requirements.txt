@@ -1,0 +1,20 @@
+# VolQRC Phase 3 Requirements
+# Core Dependencies
+qiskit>=1.2,<3
+qiskit-aer>=0.15
+numpy>=1.24
+pandas>=2.0
+scikit-learn>=1.3
+scipy>=1.11
+arch>=6.1
+matplotlib>=3.7
+pyyaml>=6.0
+
+# Deep Learning Baseline (LSTM)
+torch>=2.0
+
+# Automated Testing
+pytest>=8.0
+
+# qBraid QPU Integration
+qbraid>=0.11
