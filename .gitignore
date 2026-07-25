@@ -1,0 +1,22 @@
+# Byte-compiled / Python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Temporary cache directories & binary cache files
+.cache/
+.pytest_cache/
+.phase3_cache/
+*.npz
+
+# Virtual environments
+.venv/
+env/
+venv/
+ENV/
+
+# System and IDE files
+.DS_Store
+.vscode/
+.idea/
+*.log
