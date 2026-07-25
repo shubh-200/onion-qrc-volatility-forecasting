@@ -245,6 +245,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--cost-per-shot-usd", type=float, default=0.0)
     parser.add_argument("--fixed-cost-per-circuit-usd", type=float, default=0.0)
     parser.add_argument("--spend-cap-usd", type=float, default=25.0)
+    parser.add_argument("--max-circuits", type=int, default=None, help="Limit number of circuits to prepare/submit")
     parser.add_argument("--optimization-level", type=int, choices=range(4), default=1)
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_EXPORT_DIR)
     parser.add_argument("--device-id")
@@ -290,8 +291,10 @@ def main(argv: Sequence[str] | None = None) -> int:
         topology=args.topology,
         seeds=args.seeds,
         output_dir=args.output_dir,
-        optimization_level=args.optimization_level,
     )
+    if args.max_circuits is not None:
+        manifest = manifest[:args.max_circuits]
+        circuits = circuits[:args.max_circuits]
     jobs = submit_circuits(
         circuits,
         device_id=args.device_id or "",

@@ -53,6 +53,8 @@ def build_parser() -> argparse.ArgumentParser:
                    help="Override default shots for the selected mode")
     p.add_argument("--per-regime", type=int, default=8,
                    help="Observations per regime for the 'panel' mode (default: 8)")
+    p.add_argument("--max-circuits", type=int, default=None,
+                   help="Limit maximum number of circuits to prepare/submit")
     p.add_argument("--output-dir", type=Path, default=Path("artifacts/hardware"))
     return p
 
@@ -89,6 +91,8 @@ def main(argv=None) -> int:
         "--spend-cap-usd", str(args.spend_cap_usd),
         "--output-dir", str(args.output_dir / args.mode),
     ]
+    if args.max_circuits is not None:
+        hw_argv += ["--max-circuits", str(args.max_circuits)]
     if args.live_discovery:
         hw_argv.append("--live-discovery")
     if args.device_id:
