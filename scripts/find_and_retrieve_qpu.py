@@ -178,12 +178,11 @@ def main(argv=None) -> int:
 
     print(f"\n[find_and_retrieve] Successfully retrieved results for {len(completed_jobs)} completed jobs.")
 
-    args.output_dir.mkdir(parents=True, exist_ok=True)
-    out_json = args.output_dir / "garnet_completed_jobs.json"
+    iqm_payload = []
+    rigetti_payload = []
 
-    clean_payload = []
     for cj in completed_jobs:
-        clean_payload.append({
+        entry = {
             "job_id": cj["job_id"],
             "status": cj.get("status"),
             "device": cj.get("device"),
@@ -195,16 +194,37 @@ def main(argv=None) -> int:
             },
             "counts": cj.get("counts"),
             "z_expectations": cj.get("z_expectations"),
-        })
+        }
+        device_str = str(cj.get("device", "")).lower()
+        if "rigetti" in device_str or "cepheus" in device_str:
+            rigetti_payload.append(entry)
+        else:
+            iqm_payload.append(entry)
 
-    payload = {
-        "retrieved_at": datetime.now(timezone.utc).isoformat(),
-        "total_retrieved": len(clean_payload),
-        "jobs": clean_payload,
-    }
+    args.output_dir.mkdir(parents=True, exist_ok=True)
 
-    out_json.write_text(json.dumps(payload, indent=2), encoding="utf-8")
-    print(f"[find_and_retrieve] Saved retrieved job artifact to: {out_json}")
+    if iqm_payload:
+        out_json = args.output_dir / "garnet_completed_jobs.json"
+        out_json.write_text(
+            json.dumps({"retrieved_at": datetime.now(timezone.utc).isoformat(), "total_retrieved": len(iqm_payload), "jobs": iqm_payload}, indent=2),
+            encoding="utf-8",
+        )
+        print(f"[find_and_retrieve] Saved IQM Garnet job artifact to: {out_json}")
+
+    if rigetti_payload:
+        out_json = args.output_dir / "rigetti_completed_jobs.json"
+        out_json.write_text(
+            json.dumps({"retrieved_at": datetime.now(timezone.utc).isoformat(), "total_retrieved": len(rigetti_payload), "jobs": rigetti_payload}, indent=2),
+            encoding="utf-8",
+        )
+        print(f"[find_and_retrieve] Saved Rigetti Cepheus-1 job artifact to: {out_json}")
+
+    try:
+        from scripts.evaluate_recurrent_hardware import build_multi_qpu_summary
+        build_multi_qpu_summary(args.output_dir)
+    except Exception as exc:
+        print(f"[find_and_retrieve] Note: Multi-QPU evaluation step skipped: {exc}")
+
     return 0
 
 
