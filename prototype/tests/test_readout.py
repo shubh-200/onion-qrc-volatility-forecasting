@@ -1,4 +1,7 @@
-import unittest
+import sys
+from pathlib import Path
+_HERE = Path(__file__).resolve()
+sys.path.insert(0, str(_HERE.parent.parent.parent))
 
 import numpy as np
 
