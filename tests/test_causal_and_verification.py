@@ -12,17 +12,21 @@ Enforces all 9 mandatory verification rules specified in Phase3_Execution_Plan.m
 9. Result manifests contain all required resource numbers
 """
 
+import sys
+from pathlib import Path
+_HERE = Path(__file__).resolve()
+sys.path.insert(0, str(_HERE.parent.parent))
+
 from math import comb
 import json
-from pathlib import Path
 import pytest
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
 
-from gic.prototype.onion_qrc import OnionQRC, allocate_onion
-from gic.prototype.data_loader import _add_har_features, make_windows, split_data
-from gic.prototype.readout import IQPQuantumKernel, QuantumKernelClassifier
+from prototype.onion_qrc import OnionQRC, allocate_onion
+from prototype.data_loader import _add_har_features, make_windows, split_data
+from prototype.readout import IQPQuantumKernel, QuantumKernelClassifier
 
 
 # -----------------------------------------------------------------------------
