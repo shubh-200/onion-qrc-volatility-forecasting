@@ -2,7 +2,7 @@ import unittest
 
 import numpy as np
 
-from gic.prototype.readout import (
+from prototype.readout import (
     IQPQuantumKernel,
     QuantumKernelClassifier,
     VolQRCReadout,

@@ -2,8 +2,8 @@ import numpy as np
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
 
-from gic.prototype.baselines import HARRVBaseline
-from gic.prototype.data_loader import _add_har_features, make_windows, split_data
+from prototype.baselines import HARRVBaseline
+from prototype.data_loader import _add_har_features, make_windows, split_data
 
 
 def _rv_frame(n=100):
@@ -131,7 +131,7 @@ def test_regime_thresholds_are_training_only():
     q1_train, q2_train = split["regime_thresholds"]
 
     # Compute quantiles over the full target RV (training + val + test)
-    from gic.prototype.data_loader import make_windows
+    from prototype.data_loader import make_windows
     meta = make_windows(df, context=1, horizon=1, features=["log_rv_d"], return_metadata=True)
     all_rv = df["rv"].iloc[meta["target_positions"]].to_numpy()
     q1_all, q2_all = np.quantile(all_rv, [0.33, 0.66])

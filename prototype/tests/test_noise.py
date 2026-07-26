@@ -3,7 +3,7 @@ import importlib.util
 import numpy as np
 import pytest
 
-from gic.prototype import run_noise as noise
+from prototype import run_noise as noise
 
 
 def test_case_generation_is_conservative_and_full_matrix_is_explicit():

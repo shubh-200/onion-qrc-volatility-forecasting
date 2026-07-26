@@ -5,9 +5,9 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from gic.prototype.data_loader import _add_har_features
-from gic.prototype import qbraid_hardware as hardware
-from gic.prototype import run_phase3 as phase3
+from prototype.data_loader import _add_har_features
+from prototype import qbraid_hardware as hardware
+from prototype import run_phase3 as phase3
 
 
 def _frame(n=120):
