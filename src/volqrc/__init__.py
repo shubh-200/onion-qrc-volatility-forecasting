@@ -5,34 +5,32 @@ package provides the clean import surface required by the Phase 3 submission
 layout and judge reproducibility instructions.
 """
 
-from gic.prototype.data_loader import (  # noqa: F401
-    DEFAULT_FEATURES,
-    HAR_FEATURES,
+from prototype.data_loader import (  # noqa: F401
     load_spx_rv,
+    _add_har_features,
     make_windows,
     split_data,
-    label_regimes,
     DATA_SOURCE_INFO,
+    DEFAULT_FEATURES,
+    HAR_FEATURES,
 )
-from gic.prototype.onion_qrc import (  # noqa: F401
+from prototype.onion_qrc import (  # noqa: F401
     OnionQRC,
     SingleBandQRC,
+    OnionAllocation,
     allocate_onion,
-    random_ising_params,
 )
-from gic.prototype.readout import (  # noqa: F401
-    VolQRCReadout,
+from prototype.readout import (  # noqa: F401
     RidgeReadout,
     IQPQuantumKernel,
     QuantumKernelClassifier,
     compute_metrics,
     compute_regime_metrics,
-    mincer_zarnowitz,
     diebold_mariano,
-    block_bootstrap_confidence_interval,
+    mincer_zarnowitz,
     model_confidence_set,
 )
-from gic.prototype.baselines import (  # noqa: F401
+from prototype.baselines import (  # noqa: F401
     GARCHBaseline,
     EGARCHBaseline,
     HARRVBaseline,

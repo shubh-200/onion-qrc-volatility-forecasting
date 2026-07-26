@@ -1,6 +1,6 @@
 """Forecast and regime metrics — re-export from gic.prototype.readout."""
 
-from gic.prototype.readout import (  # noqa: F401
+from prototype.readout import (  # noqa: F401
     compute_metrics,
     compute_regime_metrics,
     mincer_zarnowitz,

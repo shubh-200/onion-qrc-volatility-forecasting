@@ -97,10 +97,14 @@ class GARCHBaseline:
         if forecast_start < 2 or forecast_start >= len(values):
             raise ValueError("start must leave training data and forecast targets")
 
+        import warnings
+
         forecasts = np.empty(len(values) - forecast_start)
         for output_i, target_t in enumerate(range(forecast_start, len(values))):
             history_start = max(0, target_t - window) if mode == "rolling" else 0
-            fitted = self._make_model(values[history_start:target_t]).fit(disp="off")
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore")
+                fitted = self._make_model(values[history_start:target_t]).fit(disp="off", show_warning=False)
             fc = fitted.forecast(horizon=1, reindex=False)
             forecasts[output_i] = fc.variance.values[-1, 0] / 10000.0
 

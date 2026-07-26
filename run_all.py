@@ -19,7 +19,10 @@ from __future__ import annotations
 import sys
 import time
 import subprocess
+import warnings
 from pathlib import Path
+
+warnings.filterwarnings("ignore")
 
 _HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(_HERE))

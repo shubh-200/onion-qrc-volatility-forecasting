@@ -1,6 +1,6 @@
 """Readout and statistical utilities — re-export from gic.prototype.readout."""
 
-from gic.prototype.readout import (  # noqa: F401
+from prototype.readout import (  # noqa: F401
     RidgeReadout,
     IQPQuantumKernel,
     QuantumKernelClassifier,

@@ -1,6 +1,6 @@
 """Data loading and preprocessing — thin re-export from gic.prototype.data_loader."""
 
-from gic.prototype.data_loader import (  # noqa: F401
+from prototype.data_loader import (  # noqa: F401
     DEFAULT_FEATURES,
     HAR_FEATURES,
     DATA_SOURCE_INFO,

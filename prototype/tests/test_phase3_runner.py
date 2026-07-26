@@ -191,7 +191,7 @@ def test_fixed_seed_reservoir_is_deterministic(tmp_path):
             rng = np.random.default_rng(int(abs(row[0]) * 1e6) % (2**31))
             return rng.standard_normal(self.n_observables)
 
-    import gic.prototype.run_phase3 as _p3
+    import prototype.run_phase3 as _p3
     original_cls = _p3.OnionQRC
     _p3.OnionQRC = CountingQRC
     try:

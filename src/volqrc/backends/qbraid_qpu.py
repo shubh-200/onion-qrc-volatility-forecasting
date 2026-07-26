@@ -1,6 +1,6 @@
 """qBraid QPU backend — re-exports from qbraid_hardware."""
 
-from gic.prototype.qbraid_hardware import (  # noqa: F401
+from prototype.qbraid_hardware import (  # noqa: F401
     select_balanced_panel,
     estimate_cost,
     enforce_spend_cap,

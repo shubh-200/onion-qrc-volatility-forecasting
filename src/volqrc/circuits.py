@@ -1,6 +1,6 @@
 """Circuit construction — thin re-export from gic.prototype.onion_qrc."""
 
-from gic.prototype.onion_qrc import (  # noqa: F401
+from prototype.onion_qrc import (  # noqa: F401
     OnionQRC,
     SingleBandQRC,
     OnionAllocation,

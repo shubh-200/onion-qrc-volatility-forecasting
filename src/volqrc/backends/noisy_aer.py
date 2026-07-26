@@ -1,6 +1,6 @@
 """Noisy Aer backend — re-exports from run_noise for shot-based simulation."""
 
-from gic.prototype.run_noise import (  # noqa: F401
+from prototype.run_noise import (  # noqa: F401
     NoiseCase,
     generate_cases,
     build_noise_model,

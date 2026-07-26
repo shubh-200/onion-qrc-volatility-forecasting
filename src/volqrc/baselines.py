@@ -1,6 +1,6 @@
 """Classical baselines — re-export from gic.prototype.baselines."""
 
-from gic.prototype.baselines import (  # noqa: F401
+from prototype.baselines import (  # noqa: F401
     GARCHBaseline,
     EGARCHBaseline,
     HARRVBaseline,
