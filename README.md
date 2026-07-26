@@ -1,8 +1,8 @@
-# VolQRC — Volatility Quantum Reservoir Computing for GIC 2026
+# VolQRC - Volatility Quantum Reservoir Computing for GIC 2026
 
-* **Team Name:** VolQRC Team
+* **Team Name:** Shubham Barge
 * **Project Title:** VolQRC: Volatility Quantum Reservoir Computing for SPX Realized Variance Forecasting
-* **Challenge Track:** GIC 2026 Phase 3 — Track A: Financial Volatility Prediction
+* **Challenge Track:** Track A: Financial Volatility Prediction
 
 ---
 
