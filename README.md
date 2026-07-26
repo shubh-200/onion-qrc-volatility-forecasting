@@ -2,7 +2,7 @@
 
 * **Team Name:** VolQRC Team
 * **Project Title:** VolQRC: Volatility Quantum Reservoir Computing for SPX Realized Variance Forecasting
-* **Challenge Track:** GIC 2026 Phase 3 — Open Innovation / Quantum Applications
+* **Challenge Track:** GIC 2026 Phase 3 — Track A: Financial Volatility Prediction
 
 ---
 
@@ -16,6 +16,7 @@ This repository provides full end-to-end reproducibility for:
 3. **Phase 3 Ablation Studies:** Observable-Order ($\langle Z_i \rangle$ vs. $\langle Z_i Z_j \rangle$), Regime-Gating (No Signal vs. Causal vs. Oracle), and Quantum Regime Kernel (Linear vs. RBF vs. IQP Quantum Kernel).
 4. **Physical QPU Hardware Runs & Multi-QPU Validation:** Physical execution on **IQM Garnet** (20-qubit CZ star QPU) and cross-architecture hardware evaluation on **Rigetti Cepheus-1 (108Q)** via qBraid.
 5. **Statistical Diagnostics:** Diebold-Mariano QLIKE loss tests, Mincer-Zarnowitz regressions with HAC covariance, seed aggregation, and Model Confidence Sets (MCS).
+6. **Recurrent NISQ Noise Filtering:** Demonstrates that sequential state re-encoding across daily time steps acts as an intrinsic physical noise filter, achieving positive out-of-sample $R^2$ on real QPU hardware (**IQM Garnet** $R^2 = +0.1523$, **Rigetti Cepheus-1** $R^2 = +0.1033$) without explicit error mitigation.
 
 ---
 
