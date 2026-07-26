@@ -48,13 +48,13 @@ If you wish to submit and evaluate fresh hardware jobs on physical QPUs via qBra
 export QBRAID_API_KEY="your_qbraid_api_key"
 
 # 1. Run 15-Qubit Panel Run on IQM Garnet (1024 shots)
-python scripts/submit_qpu.py --mode panel --n-qubits 15 --device-id iqm_garnet --submit
+python scripts/submit_qpu.py --mode panel --n-qubits 15 --device-id aws:iqm:qpu:garnet --submit
 
 # 2. Run 20-Qubit Panel Run on IQM Garnet (1024 shots)
-python scripts/submit_qpu.py --mode panel --n-qubits 20 --device-id iqm_garnet --submit
+python scripts/submit_qpu.py --mode panel --n-qubits 20 --device-id aws:iqm:qpu:garnet --submit
 
 # 3. Run 5-Day Recurrent Run on IQM Garnet (15 Qubits, 512 shots)
-python scripts/submit_qpu.py --mode recurrent --n-qubits 15 --seeds 42 --shots 512 --max-circuits 5 --device-id iqm_garnet --submit
+python scripts/submit_qpu.py --mode recurrent --n-qubits 15 --seeds 42 --shots 512 --max-circuits 5 --device-id aws:iqm:qpu:garnet --submit
 
 # 4. Run 5-Day Recurrent Run on Rigetti Cepheus-1 108Q (15 Qubits, 512 shots)
 python scripts/submit_qpu.py --mode recurrent --n-qubits 15 --seeds 42 --shots 512 --max-circuits 5 --device-id aws:rigetti:qpu:cepheus-1-108q --submit
