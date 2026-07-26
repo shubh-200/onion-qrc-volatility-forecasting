@@ -96,7 +96,6 @@ class GARCHBaseline:
         forecast_start = window if start is None else start
         if forecast_start < 2 or forecast_start >= len(values):
             raise ValueError("start must leave training data and forecast targets")
-
         import warnings
 
         forecasts = np.empty(len(values) - forecast_start)

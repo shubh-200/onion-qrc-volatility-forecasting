@@ -1,0 +1,227 @@
+{
+  "backend_intent": "qbraid_hardware",
+  "balanced_panel_dates": [
+    "2016-01-04T00:00:00",
+    "2016-04-15T00:00:00",
+    "2016-06-30T00:00:00",
+    "2016-10-11T00:00:00",
+    "2016-11-10T00:00:00",
+    "2016-11-25T00:00:00",
+    "2017-03-24T00:00:00",
+    "2017-04-27T00:00:00",
+    "2017-06-14T00:00:00"
+  ],
+  "circuits": [
+    {
+      "date": "2016-01-04T00:00:00",
+      "depth": 37,
+      "file": "artifacts\\hardware\\recurrent\\onion_n15_seed42_20160104_000.qasm",
+      "n_qubits": 15,
+      "operations": {
+        "measure": 15,
+        "rx": 60,
+        "ry": 15,
+        "rzz": 60
+      },
+      "qasm_format": "openqasm3",
+      "resources": {
+        "encoding_ry": 15,
+        "feedback_ry": 0,
+        "interaction_edges": 15,
+        "logical_gates": 135,
+        "measurements": 15,
+        "n_classical_bits": 15,
+        "n_observables": 120,
+        "n_qubits": 15,
+        "rx": 60,
+        "rzz": 60,
+        "single_qubit_gates": 75,
+        "topology": "ring",
+        "total_operations": 150,
+        "trotter_steps": 4,
+        "two_qubit_gates": 60
+      },
+      "seed": 42,
+      "topology": "ring"
+    },
+    {
+      "date": "2016-04-15T00:00:00",
+      "depth": 37,
+      "file": "artifacts\\hardware\\recurrent\\onion_n15_seed42_20160415_001.qasm",
+      "n_qubits": 15,
+      "operations": {
+        "measure": 15,
+        "rx": 60,
+        "ry": 15,
+        "rzz": 60
+      },
+      "qasm_format": "openqasm3",
+      "resources": {
+        "encoding_ry": 15,
+        "feedback_ry": 0,
+        "interaction_edges": 15,
+        "logical_gates": 135,
+        "measurements": 15,
+        "n_classical_bits": 15,
+        "n_observables": 120,
+        "n_qubits": 15,
+        "rx": 60,
+        "rzz": 60,
+        "single_qubit_gates": 75,
+        "topology": "ring",
+        "total_operations": 150,
+        "trotter_steps": 4,
+        "two_qubit_gates": 60
+      },
+      "seed": 42,
+      "topology": "ring"
+    },
+    {
+      "date": "2016-06-30T00:00:00",
+      "depth": 37,
+      "file": "artifacts\\hardware\\recurrent\\onion_n15_seed42_20160630_002.qasm",
+      "n_qubits": 15,
+      "operations": {
+        "measure": 15,
+        "rx": 60,
+        "ry": 15,
+        "rzz": 60
+      },
+      "qasm_format": "openqasm3",
+      "resources": {
+        "encoding_ry": 15,
+        "feedback_ry": 0,
+        "interaction_edges": 15,
+        "logical_gates": 135,
+        "measurements": 15,
+        "n_classical_bits": 15,
+        "n_observables": 120,
+        "n_qubits": 15,
+        "rx": 60,
+        "rzz": 60,
+        "single_qubit_gates": 75,
+        "topology": "ring",
+        "total_operations": 150,
+        "trotter_steps": 4,
+        "two_qubit_gates": 60
+      },
+      "seed": 42,
+      "topology": "ring"
+    },
+    {
+      "date": "2016-10-11T00:00:00",
+      "depth": 37,
+      "file": "artifacts\\hardware\\recurrent\\onion_n15_seed42_20161011_003.qasm",
+      "n_qubits": 15,
+      "operations": {
+        "measure": 15,
+        "rx": 60,
+        "ry": 15,
+        "rzz": 60
+      },
+      "qasm_format": "openqasm3",
+      "resources": {
+        "encoding_ry": 15,
+        "feedback_ry": 0,
+        "interaction_edges": 15,
+        "logical_gates": 135,
+        "measurements": 15,
+        "n_classical_bits": 15,
+        "n_observables": 120,
+        "n_qubits": 15,
+        "rx": 60,
+        "rzz": 60,
+        "single_qubit_gates": 75,
+        "topology": "ring",
+        "total_operations": 150,
+        "trotter_steps": 4,
+        "two_qubit_gates": 60
+      },
+      "seed": 42,
+      "topology": "ring"
+    },
+    {
+      "date": "2016-11-10T00:00:00",
+      "depth": 37,
+      "file": "artifacts\\hardware\\recurrent\\onion_n15_seed42_20161110_004.qasm",
+      "n_qubits": 15,
+      "operations": {
+        "measure": 15,
+        "rx": 60,
+        "ry": 15,
+        "rzz": 60
+      },
+      "qasm_format": "openqasm3",
+      "resources": {
+        "encoding_ry": 15,
+        "feedback_ry": 0,
+        "interaction_edges": 15,
+        "logical_gates": 135,
+        "measurements": 15,
+        "n_classical_bits": 15,
+        "n_observables": 120,
+        "n_qubits": 15,
+        "rx": 60,
+        "rzz": 60,
+        "single_qubit_gates": 75,
+        "topology": "ring",
+        "total_operations": 150,
+        "trotter_steps": 4,
+        "two_qubit_gates": 60
+      },
+      "seed": 42,
+      "topology": "ring"
+    }
+  ],
+  "cost_estimate": {
+    "circuits": 9,
+    "cost_per_shot_usd": 0.0,
+    "estimated_total_usd": 0.0,
+    "fixed_cost_per_circuit_usd": 0.0,
+    "shots_per_circuit": 512,
+    "total_shots": 4608
+  },
+  "created_at": "2026-07-25T18:35:20.305416+00:00",
+  "device_id": "aws:rigetti:qpu:cepheus-1-108q",
+  "jobs": [
+    {
+      "device_id": "aws:rigetti:qpu:cepheus-1-108q",
+      "job_id": "aws:rigetti:qpu:cepheus-1-108q-dc0c-qjob-6a6501e20936bd6f4cec8a79",
+      "shots": 512
+    },
+    {
+      "device_id": "aws:rigetti:qpu:cepheus-1-108q",
+      "job_id": "aws:rigetti:qpu:cepheus-1-108q-dc0c-qjob-6a6501e40936bd6f4cec8a7c",
+      "shots": 512
+    },
+    {
+      "device_id": "aws:rigetti:qpu:cepheus-1-108q",
+      "job_id": "aws:rigetti:qpu:cepheus-1-108q-dc0c-qjob-6a6501e50936bd6f4cec8a80",
+      "shots": 512
+    },
+    {
+      "device_id": "aws:rigetti:qpu:cepheus-1-108q",
+      "job_id": "aws:rigetti:qpu:cepheus-1-108q-dc0c-qjob-6a6501e70936bd6f4cec8a83",
+      "shots": 512
+    },
+    {
+      "device_id": "aws:rigetti:qpu:cepheus-1-108q",
+      "job_id": "aws:rigetti:qpu:cepheus-1-108q-dc0c-qjob-6a6501e90936bd6f4cec8a87",
+      "shots": 512
+    }
+  ],
+  "runtime_seconds": 12.529473900001904,
+  "spend_cap_usd": 25.0,
+  "submitted": true,
+  "versions": {
+    "arch": "8.0.0",
+    "numpy": "2.4.6",
+    "pandas": "2.2.2",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.10",
+    "qiskit": "2.5.0",
+    "scikit-learn": "1.6.1",
+    "scipy": "1.15.2",
+    "torch": null
+  }
+}

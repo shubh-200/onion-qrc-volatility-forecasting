@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""evaluate_recurrent_hardware.py — Evaluate recurrent QPU execution results.
+"""evaluate_recurrent_hardware.py — Evaluate 5-day recurrent QPU execution results.
 
-Reads retrieved QPU expectation values from garnet_completed_jobs.json / rigetti_completed_jobs.json,
+Reads retrieved QPU expectation values from artifacts/hardware/recurrent/garnet_completed_jobs.json,
 aligns them with SPX RV target dates, evaluates predictions, and updates hardware manifests.
 
 Usage:
-    python scripts/evaluate_recurrent_hardware.py
+    python scripts/evaluate_recurrent_hardware.py [--input artifacts/hardware/recurrent/garnet_completed_jobs.json]
 """
 from __future__ import annotations
 
@@ -47,17 +47,20 @@ def evaluate_recurrent_jobs(retrieved_path: Path, output_dir: Path, report_filen
     out_filename = report_filename or default_filename
     print(f"[eval_recurrent] Evaluating {len(jobs)} retrieved recurrent jobs for {title_device}...")
 
+    # Load ground truth data
     df = load_spx_rv(allow_synthetic=False)
     prep = prepare_phase3_data(df)
     y_test = prep["y_test"]
     n_test = len(y_test)
 
+    # Extract Z expectations per job
     feature_rows = []
     job_summaries = []
     for idx, j in enumerate(jobs):
         z_dict = j.get("z_expectations", {})
         if not z_dict:
             continue
+        # Convert str keys to int keys if needed
         z_vec = [float(z_dict.get(str(q), z_dict.get(q, 0.0))) for q in range(len(z_dict))]
         feature_rows.append(z_vec)
         job_summaries.append({
@@ -75,11 +78,14 @@ def evaluate_recurrent_jobs(retrieved_path: Path, output_dir: Path, report_filen
 
     X_qpu = np.array(feature_rows)
 
+    # Train a baseline readout or evaluate alignment against first len(feature_rows) test dates
     n_eval = min(len(feature_rows), n_test)
     y_true_slice = y_test[:n_eval]
 
+    # Evaluate simple ridge readout on available QPU step features
     from sklearn.linear_model import Ridge
     ridge = Ridge(alpha=1.0)
+    # Fit on training data representation or slice
     if n_eval > 1:
         ridge.fit(X_qpu[:n_eval], y_true_slice)
         y_pred = ridge.predict(X_qpu[:n_eval])

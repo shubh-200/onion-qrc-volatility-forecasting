@@ -1,6 +1,6 @@
 """VolQRC — Volatility Quantum Reservoir Computing.
 
-Public API re-exports.  All heavy lifting is in ``gic.prototype``; this
+Public API re-exports.  All heavy lifting is in ``prototype``; this
 package provides the clean import surface required by the Phase 3 submission
 layout and judge reproducibility instructions.
 """

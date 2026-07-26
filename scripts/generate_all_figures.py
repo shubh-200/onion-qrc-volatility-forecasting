@@ -164,7 +164,7 @@ def generate_fig1_architecture():
     draw_arrow(ax, 13.8, 1.7, 14.4, 1.7)
 
     # --- Clear Non-Overlapping Bottom Feedback Path ---
-    # Route: Long-band measurement output -> down to y=1.4 -> left to x=5.15 -> up to Long Band (2.7)
+    # Route: Long-band measurement output -> down to y=1.2 -> left to x=5.15 -> up to Long Band (2.7)
     fb_path = [
         (10.5, 3.0),
         (10.5, 1.4),

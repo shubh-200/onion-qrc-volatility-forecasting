@@ -31,6 +31,7 @@ def fetch_recent_jobs(limit: int = 20, api_key: str | None = None) -> list[dict]
         print("ERROR: qbraid package is not installed.", file=sys.stderr)
         return []
 
+    # Attempt fetching using qbraid get_jobs or Service
     jobs_raw = []
     providers_to_try = []
 
@@ -129,12 +130,15 @@ def compute_z_expectation(counts: dict[str, int]) -> dict[int, float]:
     if not counts:
         return {}
     total_shots = sum(counts.values())
+    # find max bitstring length
     num_qubits = max(len(bs.replace(" ", "")) for bs in counts.keys())
     z_exp = {q: 0.0 for q in range(num_qubits)}
 
     for bs, cnt in counts.items():
         clean_bs = bs.replace(" ", "")
+        # Qiskit bitstring order is little-endian: bs[0] is highest qubit index
         for q in range(len(clean_bs)):
+            # qubit index q corresponds to position len(clean_bs) - 1 - q from left
             bit_char = clean_bs[len(clean_bs) - 1 - q]
             val = 1.0 if bit_char == '0' else -1.0
             z_exp[q] += val * cnt

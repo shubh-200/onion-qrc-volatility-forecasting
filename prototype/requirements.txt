@@ -1,0 +1,13 @@
+qiskit>=1.2,<3
+qiskit-aer>=0.15
+qbraid>=0.11
+numpy>=1.24
+pandas>=2.0
+scikit-learn>=1.3
+arch>=6.1
+reservoirpy>=0.3
+scipy>=1.11
+matplotlib>=3.7
+pytest>=8.0
+# Optional but required to execute the LSTM baseline:
+# torch>=2.2

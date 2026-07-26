@@ -1,5 +1,5 @@
 {
-  "created_at": "2026-07-24T11:44:06Z",
+  "created_at": "2026-07-26T16:48:30Z",
   "results": [
     {
       "model": "OnionQRC QPU N=20 (IQM Garnet)",
@@ -17,10 +17,10 @@
         "n_obs": 389
       },
       "test_metrics": {
-        "rmse": 1.7739,
-        "r2": -7.7286,
-        "qlike": 0.9286,
-        "mae": 1.7428,
+        "rmse": 1.3327784579496118,
+        "r2": -3.9270431637545338,
+        "qlike": 0.5842493733960756,
+        "mae": 1.297808701009571,
         "n_obs": 24
       },
       "resource_counts": {
