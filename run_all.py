@@ -56,7 +56,8 @@ def main() -> int:
         ("Quantum Simulator Scaling (Ring N=5, 10, 15)", [sys.executable, "scripts/run_scaling.py", "--n-qubits", "5", "10", "15", "--topology", "ring"]),
         ("Quantum Simulator Scaling (Fully-Connected N=5, 10)", [sys.executable, "scripts/run_scaling.py", "--n-qubits", "5", "10", "--topology", "fully_connected"]),
         ("Phase 3 Ablation Studies (Observables, Gating, IQP Kernel)", [sys.executable, "scripts/run_ablations.py"]),
-        ("Hardware QPU Evaluation (IQM Garnet N=15/20 Artifacts)", [sys.executable, "scripts/evaluate_hardware_results.py"]),
+        ("Hardware QPU Panel Evaluation (IQM Garnet N=15/20 Artifacts)", [sys.executable, "scripts/evaluate_hardware_results.py"]),
+        ("Recurrent Multi-QPU Evaluation (IQM Garnet & Rigetti Cepheus-1)", [sys.executable, "scripts/parse_raw_jobs.py"]),
         ("Statistical Diagnostics (DM, MZ, Bootstraps, MCS)", [sys.executable, "scripts/compute_statistics.py"]),
         ("Build Deliverables & Summary Tables", [sys.executable, "scripts/build_report.py"]),
     ]
