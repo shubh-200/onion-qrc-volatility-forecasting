@@ -1,7 +1,5 @@
 # VolQRC — Volatility Quantum Reservoir Computing for GIC 2026
 
-[<img src="https://qbraid-static.s3.amazonaws.com/logos/Launch_on_qBraid_white.png" width="150">](https://account.qbraid.com?gitHubUrl=https://github.com/shubh-200/onion-qrc-volatility-forecasting)
-
 * **Team Name:** VolQRC Team
 * **Project Title:** VolQRC: Volatility Quantum Reservoir Computing for SPX Realized Variance Forecasting
 * **Challenge Track:** GIC 2026 Phase 3 — Open Innovation / Quantum Applications
@@ -18,6 +16,28 @@ This repository provides full end-to-end reproducibility for:
 3. **Phase 3 Ablation Studies:** Observable-Order ($\langle Z_i \rangle$ vs. $\langle Z_i Z_j \rangle$), Regime-Gating (No Signal vs. Causal vs. Oracle), and Quantum Regime Kernel (Linear vs. RBF vs. IQP Quantum Kernel).
 4. **Physical QPU Hardware Runs & Multi-QPU Validation:** Physical execution on **IQM Garnet** (20-qubit CZ star QPU) and cross-architecture hardware evaluation on **Rigetti Cepheus-1 (108Q)** via qBraid.
 5. **Statistical Diagnostics:** Diebold-Mariano QLIKE loss tests, Mincer-Zarnowitz regressions with HAC covariance, seed aggregation, and Model Confidence Sets (MCS).
+
+---
+
+## Evaluation Metrics Explained
+
+To evaluate volatility forecasting accuracy and financial risk management performance, models are assessed across four quantitative metrics:
+
+1. **Root Mean Squared Error (RMSE ↓):**
+   $$\text{RMSE} = \sqrt{\frac{1}{T} \sum_{t=1}^{T} (y_t - \hat{y}_t)^2}$$
+   Measures overall prediction error magnitude in log volatility space ($y_t = \ln(\text{RV}_{5,t})$). Lower values indicate higher accuracy.
+
+2. **Quasi-Likelihood Loss (QLIKE ↓):**
+   $$\text{QLIKE} = \frac{1}{T} \sum_{t=1}^{T} \left( \frac{y_t}{\hat{y}_t} - \ln\left(\frac{y_t}{\hat{y}_t}\right) - 1 \right)$$
+   The standard asymmetric loss function used in financial econometrics. It penalizes under-predicting market volatility spikes much more severely than over-predicting, reflecting real-world portfolio risk management constraints. Lower values are better.
+
+3. **Mean Absolute Error (MAE ↓):**
+   $$\text{MAE} = \frac{1}{T} \sum_{t=1}^{T} |y_t - \hat{y}_t|$$
+   Average linear magnitude of forecast errors, robust to extreme outlier days. Lower values are better.
+
+4. **Out-of-Sample Coefficient of Determination ($R^2$ ↑):**
+   $$R^2 = 1 - \frac{\sum_{t=1}^{T} (y_t - \hat{y}_t)^2}{\sum_{t=1}^{T} (y_t - \bar{y}_\text{train})^2}$$
+   Proportion of market volatility variance explained by the model relative to a historical mean baseline. Positive values indicate true predictive power beyond naive historical averaging.
 
 ---
 
@@ -57,7 +77,57 @@ Evaluating sequential daily state progression with 512 shots per step on real **
   $$\text{Step 1: } 0.4018 \longrightarrow \text{Step 2: } 0.3849 \longrightarrow \text{Step 3: } 0.3424 \longrightarrow \text{Step 4: } 0.4591 \longrightarrow \text{Step 5: } 0.4188$$
 
 ### 2. Multi-QPU Transferability on Rigetti Cepheus-1 (108-Qubit QPU)
-To test cross-architecture transferability, the 5-step recurrent sequence was submitted to **Rigetti Cepheus-1 (108Q)** (qBraid device ID: `aws:rigetti:qpu:cepheus-1-108q`). This validates performance across both CZ star topology (IQM) and 8-qubit lattice topology (Rigetti).
+To test cross-architecture transferability, the 5-step recurrent sequence was executed on **Rigetti Cepheus-1 (108Q)** (qBraid device ID: `aws:rigetti:qpu:cepheus-1-108q`):
+
+| QPU Target | Architecture | Steps | Qubits | Shots | Test RMSE ↓ | Test QLIKE ↓ | Test MAE ↓ | Test R² ↑ |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Rigetti Cepheus-1** | **8-Qubit Lattice** | **5** | **15** | **512** | **0.1037** | **0.0056** | **0.0790** | **+0.1033** |
+
+---
+
+## Setup & Execution on qBraid
+
+[<img src="https://qbraid-static.s3.amazonaws.com/logos/Launch_on_qBraid_white.png" width="150">](https://account.qbraid.com?gitHubUrl=https://github.com/shubh-200/onion-qrc-volatility-forecasting)
+
+Recommended Python version: **Python 3.10 – 3.12**.
+
+### 1. Environment Setup & One-Command Reproduction
+
+Launch the repository on qBraid Lab (or locally) and run the full master reproduction pipeline:
+
+```bash
+# 1. Install dependencies and local package in editable mode
+pip install -r requirements.txt
+pip install -e .
+
+# 2. Run master end-to-end reproduction runner
+python run_all.py
+```
+
+### 2. Executing Physical QPU Hardware Runs from Scratch
+
+If you wish to submit and evaluate fresh hardware jobs on physical QPUs via qBraid (requires setting `QBRAID_API_KEY`):
+
+```bash
+# Set your qBraid API Key
+export QBRAID_API_KEY="your_qbraid_api_key"
+
+# 1. Run 15-Qubit Panel Run on IQM Garnet (1024 shots)
+python scripts/submit_qpu.py --mode panel --n-qubits 15 --device-id iqm_garnet --submit
+
+# 2. Run 20-Qubit Panel Run on IQM Garnet (1024 shots)
+python scripts/submit_qpu.py --mode panel --n-qubits 20 --device-id iqm_garnet --submit
+
+# 3. Run 5-Day Recurrent Run on IQM Garnet (15 Qubits, 512 shots)
+python scripts/submit_qpu.py --mode recurrent --n-qubits 15 --seeds 42 --shots 512 --max-circuits 5 --device-id iqm_garnet --submit
+
+# 4. Run 5-Day Recurrent Run on Rigetti Cepheus-1 108Q (15 Qubits, 512 shots)
+python scripts/submit_qpu.py --mode recurrent --n-qubits 15 --seeds 42 --shots 512 --max-circuits 5 --device-id aws:rigetti:qpu:cepheus-1-108q --submit
+
+# Retrieve & Evaluate QPU Results
+python scripts/find_and_retrieve_qpu.py
+python scripts/parse_raw_jobs.py
+```
 
 ---
 
@@ -108,102 +178,8 @@ onion/
 
 ---
 
-## Setup Instructions
-
-### Environment Creation (qBraid or Local)
-Recommended Python version: **Python 3.10 – 3.12**.
-
-```bash
-# Clone the repository
-git clone https://github.com/shubh-200/onion-qrc-volatility-forecasting.git
-cd onion-qrc-volatility-forecasting
-
-# Install dependencies and local package in editable mode
-pip install -r requirements.txt
-pip install -e .
-```
-
----
-
-## Reproduction Guide for Judges
-
-### Mode A: One-Command Reproduction (Recommended)
-Judges can run the entire pipeline end-to-end (unit tests, baselines, simulator scaling, ablations, QPU evaluations, statistics, and report rebuilding) using:
-
-```bash
-python run_all.py
-```
-
-### Mode B: Step-by-Step Pipeline Execution
-
-```bash
-# 1. Run Automated Unit Tests (Verifies 9 Causal & Verification Rules)
-python -m pytest
-
-# 2. Train & Evaluate Classical Baselines (HAR, ESN, GARCH, EGARCH, LSTM)
-python scripts/run_baselines.py
-
-# 3. Execute Quantum Simulator Scaling (Ring N=5,10,15 & Fully-Connected N=5,10)
-python scripts/run_scaling.py --n-qubits 5 10 15 --topology ring
-python scripts/run_scaling.py --n-qubits 5 10 --topology fully_connected
-
-# 4. Execute Phase 3 Ablation Studies (Observables, Regime Gating, IQP Kernel)
-python scripts/run_ablations.py
-
-# 5. Evaluate Physical QPU Hardware Results
-python scripts/parse_raw_jobs.py
-python scripts/evaluate_recurrent_hardware.py
-python scripts/evaluate_hardware_results.py
-
-# 6. Compute Statistical Diagnostics & Update Summary Reports
-python scripts/compute_statistics.py
-python scripts/build_report.py
-```
-
----
-
-## Expected Inputs and Outputs
-
-* **Input Data:**
-  * `rv_dataset.csv`: S&P 500 5-minute realized variance dataset (60% train, 20% validation, 20% test).
-  * `global index etf return/SPX.csv`: Daily S&P 500 log price returns for GARCH/EGARCH.
-* **Output Manifests:**
-  * `artifacts/manifests/summary_table.md` & `summary_table.csv`: Final deduplicated headline result tables.
-  * `artifacts/manifests/ablations.md` & `ablations.json`: Detailed ablation study reports.
-  * `artifacts/manifests/statistical_analysis.md` & `statistical_analysis.json`: Diebold-Mariano tests, Mincer-Zarnowitz regressions, seed statistics, and Model Confidence Sets (MCS).
-  * `artifacts/hardware/recurrent/recurrent_hardware_eval.md`: 5-day recurrent QPU execution report.
-
----
-
-## Hardware QPU Reproduction (No API Key Required for Judging)
-
-To enable immediate judge evaluation without requiring judges to spend qBraid API credits:
-* Running `python scripts/parse_raw_jobs.py` and `python scripts/evaluate_hardware_results.py` automatically reads the pre-saved, verified hardware execution outputs archived in `artifacts/hardware/`.
-
-*(Optional)* To submit fresh jobs to a live QPU via qBraid:
-```cmd
-set QBRAID_API_KEY=your_qbraid_api_key
-python scripts/submit_qpu.py --mode recurrent --n-qubits 15 --seeds 42 --shots 512 --max-circuits 5 --device-id aws:rigetti:qpu:cepheus-1-108q --submit
-python scripts/find_and_retrieve_qpu.py
-```
-
----
-
 ## Known Limitations and Assumptions
 
 1. **Classically Intractable $N=20$ Simulator:** Full time-series statevector simulation of $N=20$ fully connected reservoirs over 2,500 continuous daily time steps is classically intractable. Therefore, $N=20$ is evaluated via physical QPU hardware validation on **IQM Garnet**.
 2. **Archived QPU Execution:** Hardware results rely on pre-archived execution manifests in `artifacts/hardware/` so judges do not require active qBraid hardware credits.
 3. **Strict Causal Alignment:** All model features strictly use data available through day $t$ to forecast day $t+1$ realized variance ($RV_{t+1}$). Regime thresholds and scalers are fitted on training data only.
-
----
-
-## Citation
-
-```bibtex
-@article{volqrc2026,
-  title={VolQRC: Volatility Quantum Reservoir Computing with Onion Allocation for SPX Realized Variance Forecasting},
-  author={VolQRC Team},
-  journal={GIC 2026 Phase 3 Submission},
-  year={2026}
-}
-```
