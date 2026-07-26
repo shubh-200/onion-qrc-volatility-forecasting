@@ -1,8 +1,8 @@
-# VolQRC — Volatility Quantum Reservoir Computing for GIC 2026
+# VolQRC - Volatility Quantum Reservoir Computing for GIC 2026
 
-* **Team Name:** VolQRC Team
+* **Team Name:** Shubham Barge
 * **Project Title:** VolQRC: Volatility Quantum Reservoir Computing for SPX Realized Variance Forecasting
-* **Challenge Track:** GIC 2026 Phase 3 — Track A: Financial Volatility Prediction
+* **Challenge Track:** Track A: Financial Volatility Prediction
 
 ---
 
@@ -22,9 +22,7 @@ This repository provides full end-to-end reproducibility for:
 
 ## Setup & Execution on qBraid
 
-[<img src="https://qbraid-static.s3.amazonaws.com/logos/Launch_on_qBraid_white.png" width="150">](https://account.qbraid.com?gitHubUrl=https://github.com/shubh-200/onion-qrc-volatility-forecasting)
-
-Recommended Python version: **Python 3.10 – 3.12**.
+[<img src="https://qbraid-static.s3.amazonaws.com/logos/Launch_on_qBraid_white.png" width="250">](https://account.qbraid.com?gitHubUrl=https://github.com/shubh-200/onion-qrc-volatility-forecasting)
 
 ### 1. Environment Setup & One-Command Reproduction
 
@@ -48,13 +46,13 @@ If you wish to submit and evaluate fresh hardware jobs on physical QPUs via qBra
 export QBRAID_API_KEY="your_qbraid_api_key"
 
 # 1. Run 15-Qubit Panel Run on IQM Garnet (1024 shots)
-python scripts/submit_qpu.py --mode panel --n-qubits 15 --device-id iqm_garnet --submit
+python scripts/submit_qpu.py --mode panel --n-qubits 15 --device-id aws:iqm:qpu:garnet --submit
 
 # 2. Run 20-Qubit Panel Run on IQM Garnet (1024 shots)
-python scripts/submit_qpu.py --mode panel --n-qubits 20 --device-id iqm_garnet --submit
+python scripts/submit_qpu.py --mode panel --n-qubits 20 --device-id aws:iqm:qpu:garnet --submit
 
 # 3. Run 5-Day Recurrent Run on IQM Garnet (15 Qubits, 512 shots)
-python scripts/submit_qpu.py --mode recurrent --n-qubits 15 --seeds 42 --shots 512 --max-circuits 5 --device-id iqm_garnet --submit
+python scripts/submit_qpu.py --mode recurrent --n-qubits 15 --seeds 42 --shots 512 --max-circuits 5 --device-id aws:iqm:qpu:garnet --submit
 
 # 4. Run 5-Day Recurrent Run on Rigetti Cepheus-1 108Q (15 Qubits, 512 shots)
 python scripts/submit_qpu.py --mode recurrent --n-qubits 15 --seeds 42 --shots 512 --max-circuits 5 --device-id aws:rigetti:qpu:cepheus-1-108q --submit
@@ -98,8 +96,8 @@ Below are the benchmark results evaluated out-of-sample across classical baselin
 | **OnionQRC (N=10)** | **OnionQRC** | 10 | ring | Statevector Sim | 0.3592 | 0.0624 | 0.2955 | 0.6246 | ok |
 | **OnionQRC (N=10)** | **OnionQRC** | 10 | fully_connected | Statevector Sim | 0.3524 | 0.0606 | 0.2887 | 0.6387 | ok |
 | **OnionQRC (N=15)** | **OnionQRC** | **15** | **ring** | **Statevector Sim** | **0.3460** | **0.0591** | **0.2835** | **0.6518** | ok |
-| **OnionQRC (N=15)** | **OnionQRC Recurrent** | **15** | **CZ Star** | **IQM Garnet QPU (5D)**| **0.1009** | **0.0053** | **0.0762** | **+0.1523**| ok |
-| **OnionQRC (N=15)** | **OnionQRC Recurrent** | **15** | **8Q Lattice** | **Rigetti Cepheus-1 (5D)**| **0.1037** | **0.0056** | **0.0790** | **+0.1033**| ok |
+| **OnionQRC (N=15)** | **OnionQRC Recurrent (5-days)** | **15** | **CZ Star** | **IQM Garnet QPU**| **0.1009** | **0.0053** | **0.0762** | **+0.1523**| ok |
+| **OnionQRC (N=15)** | **OnionQRC Recurrent (5-days)** | **15** | **8Q Lattice** | **Rigetti Cepheus-1**| **0.1037** | **0.0056** | **0.0790** | **+0.1033**| ok |
 | **OnionQRC (N=15)** | **OnionQRC Panel** | 15 | ring | IQM Garnet Panel | 2.3208 | 1.4033 | 2.2972 | -13.9400 | ok |
 | **OnionQRC (N=20)** | **OnionQRC Panel** | 20 | ring | IQM Garnet Panel | 1.7739 | 0.9286 | 1.7428 | -7.7286 | ok |
 
@@ -184,8 +182,6 @@ onion/
 │   ├── metrics.py                 # RMSE, MAE, QLIKE, R², Mincer-Zarnowitz, Diebold-Mariano, MCS
 │   └── backends/                  # Execution backends (statevector, noisy Aer, qBraid QPU)
 ├── prototype/                     # Prototype modules, figure generation, and results cache
-│   ├── figures/                   # VolQRC architecture and circuit diagrams
-│   └── results/                   # Archived Phase 2 and Phase 3 benchmark results
 ├── scripts/                       # Executable CLI scripts
 │   ├── prepare_data.py            # Prepares SPX dataset & verifies checksums
 │   ├── run_baselines.py           # Runs all 8 classical baselines
@@ -204,6 +200,7 @@ onion/
 │   ├── qpu_iqm.yaml               # IQM Garnet hardware budget & panel specs
 │   └── qpu_rigetti.yaml           # Rigetti Cepheus-1 hardware specs
 └── artifacts/                     # Output manifests & hardware artifacts
+    ├── figures/                   # Figures for statistical analysis and model performance
     ├── manifests/                 # summary_table.md, ablations.md, statistical_analysis.md
     └── hardware/                  # Pre-saved QPU job execution files and recurrent results
         ├── panel/                 # 24-circuit pre-saved panel results
