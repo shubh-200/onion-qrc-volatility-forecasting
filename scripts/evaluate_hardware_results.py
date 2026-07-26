@@ -69,16 +69,10 @@ def main(argv=None) -> int:
     qpu_features = [qrc.observables_from_counts(j["counts"]) for j in retrieved["jobs"] if "counts" in j]
     qpu_X = np.asarray(qpu_features, dtype=float)
 
-    # Match test dates from manifest circuits to target_index_test
-    panel_idx_in_test = []
-    for item in manifest["circuits"]:
-        dt = item["date"]
-        for idx, d in enumerate(data["target_index_test"]):
-            if d.isoformat().startswith(dt[:10]):
-                panel_idx_in_test.append(idx)
-                break
-
-    panel_idx = np.asarray(panel_idx_in_test, dtype=int)
+    from prototype.qbraid_hardware import select_balanced_panel
+    panel_idx = select_balanced_panel(
+        data["target_index_test"], data["regime_test"], per_regime=8, seed=42
+    )[:len(qpu_X)]
     panel_y_true = data["y_test"][panel_idx]
     panel_X_class = data["X_test"][panel_idx, :3]
 
