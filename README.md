@@ -109,29 +109,50 @@ Below are the benchmark results evaluated out-of-sample across classical baselin
 Models are evaluated across point forecasting accuracy metrics and formal econometric hypothesis tests:
 
 ### 1. Point Forecast Metrics
+
 * **Root Mean Squared Error (RMSE ↓):**
-  $$\text{RMSE} = \sqrt{\frac{1}{T} \sum_{t=1}^{T} (y_t - \hat{y}_t)^2}$$
+
+$$\text{RMSE} = \sqrt{\frac{1}{T} \sum_{t=1}^{T} (y_t - \hat{y}_t)^2}$$
+
   Measures overall prediction error magnitude in log volatility space ($y_t = \ln(\text{RV}_{5,t})$). Lower is better.
 
 * **Quasi-Likelihood Loss (QLIKE ↓):**
-  $$\text{QLIKE} = \frac{1}{T} \sum_{t=1}^{T} \left( \frac{y_t}{\hat{y}_t} - \ln\left(\frac{y_t}{\hat{y}_t}\right) - 1 \right)$$
+
+$$\text{QLIKE} = \frac{1}{T} \sum_{t=1}^{T} \left( \frac{y_t}{\hat{y}_t} - \ln\left(\frac{y_t}{\hat{y}_t}\right) - 1 \right)$$
+
   The standard asymmetric loss function in financial volatility forecasting. It heavily penalizes under-predicting volatility spikes, reflecting portfolio risk management constraints. Lower is better.
 
 * **Mean Absolute Error (MAE ↓):**
-  $$\text{MAE} = \frac{1}{T} \sum_{t=1}^{T} |y_t - \hat{y}_t|$$
+
+$$\text{MAE} = \frac{1}{T} \sum_{t=1}^{T} |y_t - \hat{y}_t|$$
+
   Average linear magnitude of forecast errors, robust to extreme outlier days. Lower is better.
 
 * **Out-of-Sample Coefficient of Determination ($R^2$ ↑):**
-  $$R^2 = 1 - \frac{\sum_{t=1}^{T} (y_t - \hat{y}_t)^2}{\sum_{t=1}^{T} (y_t - \bar{y}_\text{train})^2}$$
+
+$$R^2 = 1 - \frac{\sum_{t=1}^{T} (y_t - \hat{y}_t)^2}{\sum_{t=1}^{T} (y_t - \bar{y}_{\text{train}})^2}$$
+
   Proportion of market volatility variance explained by the model relative to a historical mean baseline. Positive values indicate true predictive power beyond naive historical averaging.
 
 ### 2. Asymptotic Econometric & Statistical Hypothesis Tests
+
 * **Diebold-Mariano (DM) Loss Differential Test:**
+
+$$\text{DM} = \frac{\bar{d}}{\sqrt{\widehat{\text{V}}(\bar{d})}} \sim \mathcal{N}(0, 1)$$
+
   Tests whether the loss differential series $d_t = L(e_{1,t}) - L(e_{2,t})$ under QLIKE loss is significantly different from zero using a heteroskedasticity and autocorrelation consistent (HAC / Newey-West) standard error.
+
 * **Mincer-Zarnowitz (MZ) Unbiasedness Regression:**
-  Fits $y_t = \alpha + \beta \hat{y}_t + e_t$ and computes an $F$-test for joint hypothesis $H_0: (\alpha, \beta) = (0, 1)$ to verify forecast unbiasedness.
+
+$$y_t = \alpha + \beta \hat{y}_t + e_t, \quad H_0: (\alpha, \beta) = (0, 1)$$
+
+  Fits linear regression of realized target on forecast and computes a joint Wald test for $H_0: (\alpha, \beta) = (0, 1)$ to verify forecast unbiasedness.
+
 * **Model Confidence Set (MCS):**
-  Uses stationary block-bootstrap resampling ($B=200$) at significance $\alpha=0.10$ to determine the superior set of models $\widehat{\mathcal{M}}^*$ under QLIKE loss.
+
+$$\widehat{\mathcal{M}}^*_{\alpha = 0.10}$$
+
+  Uses stationary block-bootstrap resampling ($B=200$) at significance $\alpha=0.10$ to determine the superior set of models under QLIKE loss.
 
 ---
 
